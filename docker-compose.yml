@@ -1,0 +1,31 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  postgres:
+    # Используем официальный образ PostgreSQL
+    image: postgres:15-alpine
+
+    # Перезапускать контейнер при сбоях, но не при остановке вручную
+    restart: unless-stopped
+
+    # Переменные окружения для настройки базы данных
+    # Prisma будет использовать их для подключения
+    environment:
+      POSTGRES_USER: postgres # Имя пользователя
+      POSTGRES_PASSWORD: password # Пароль
+      POSTGRES_DB: mydatabase # Имя базы данных
+
+    # Пробрасываем порт с хост-машины на контейнер
+    # 5432:5432 -> [порт на вашем компьютере]:[порт в контейнере]
+    ports:
+      - '5432:5432'
+
+    # (Опционально) Сохраняем данные между перезапусками контейнера
+    # Это создаст папку 'data' в текущей директории
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+networks:
+  default:

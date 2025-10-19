@@ -4,7 +4,7 @@ import { ProjectDto } from './dto/project.dto';
 import { CreateProjectUc } from 'src/model/use-cases/create-project-uc/create-project.uc';
 import { ProjectMapper } from './mappers/project.mapper';
 
-@Controller()
+@Controller('/api/v1')
 export class ProjectController {
   constructor(private readonly createProjectUc: CreateProjectUc) {}
 

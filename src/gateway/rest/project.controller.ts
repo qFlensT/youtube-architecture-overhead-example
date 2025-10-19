@@ -9,7 +9,6 @@ export class ProjectController {
   constructor(private readonly createProjectUc: CreateProjectUc) {}
 
   @Post('project')
-  // body needs to be validated
   async create(@Body() body: CreateProjectDto): Promise<ProjectDto> {
     const input = ProjectMapper.toCreateInput(body);
     const created = await this.createProjectUc.execute(input);

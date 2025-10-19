@@ -3,7 +3,7 @@ import {
   ProjectEntity,
   ProjectEntityCreateInput,
 } from 'src/model/entities/project.entity';
-import { CoreError } from 'src/model/errors/error';
+import { ModelError } from 'src/model/errors/error';
 import { IProjectRepository } from 'src/model/ports/repositories/project.repository';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class CreateProjectUc {
     const isAllowed = true;
 
     if (!isAllowed) {
-      throw new CoreError('Невозможно создать проект');
+      throw new ModelError('Невозможно создать проект');
     }
 
     const created = await this.repository.create(entity);
